@@ -58,6 +58,7 @@ _llvm_distributions = {
     "clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz": "87b88d620284d1f0573923e6f7cc89edccf11d19ebaec1cfb83b4f09ac5db09c",
     "clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz": "0f5c314f375ebd5c35b8c1d5e5b161d9efaeff0523bac287f8b4e5b751272f51",
     "clang+llvm-8.0.0-x86_64-linux-sles11.3.tar.xz": "7e2846ff60c181d1f27d97c23c25a2295f5730b6d88612ddd53b4cbb8177c4b9",
+    "LLVM-8.0.0-win64.exe": "56d582eed2d5def6accaedabbe11ae368186600798e2a6a7eb86a727fa7bb20c",
 }
 
 def download_llvm_preconfigured(rctx):
@@ -106,6 +107,10 @@ def download_llvm(rctx):
         urls = rctx.attr.urls.get("darwin", default = [])
         sha256 = rctx.attr.sha256.get("darwin", default = "")
         prefix = rctx.attr.strip_prefix.get("darwin", default = "")
+    elif rctx.os.name == "windows 10":
+        urls = rctx.attr.urls.get("win64", default = [])
+        sha256 = rctx.attr.sha256.get("win64", default = "")
+        prefix = rctx.attr.strip_prefix.get("win64", default = "")
     else:
         fail("Unsupported OS: " + rctx.os.name)
 
